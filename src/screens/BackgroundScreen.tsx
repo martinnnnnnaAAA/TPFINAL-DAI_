@@ -9,7 +9,6 @@ export default function BackgroundScreen() {
 
   useEffect(() => {
     (async () => {
-      // Request media library permissions first
       const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (galleryStatus.status !== 'granted') {
         Alert.alert(
@@ -20,7 +19,6 @@ export default function BackgroundScreen() {
         return;
       }
 
-      // Then request camera permissions
       const cameraStatus = await ImagePicker.requestCameraPermissionsAsync();
       if (cameraStatus.status !== 'granted') {
         Alert.alert(

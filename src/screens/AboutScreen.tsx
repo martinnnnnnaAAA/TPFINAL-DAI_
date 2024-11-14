@@ -10,9 +10,8 @@ interface TeamInfo {
 const TEAM_INFO = {
   teamName: "Equipo 1",
   members: [
-    "Juan Pérez",
-    "María García",
-    // Add your team members here
+    "Martin Aran",
+    "Matias Mazzeo",
   ]
 };
 

@@ -78,7 +78,6 @@ export default function VideoScreen() {
       );
     }
 
-    // For non-YouTube videos (direct video files)
     if (savedUrl.match(/\.(mpmov|avi|wmv|m4v|3gp|mkv)$/i)) {
       return (
         <View style={styles.videoContainer}>
