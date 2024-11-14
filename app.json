@@ -31,6 +31,12 @@
           "photosPermission": "La aplicación necesita acceso a tus fotos.",
           "cameraPermission": "La aplicación necesita acceso a tu cámara."
         }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
+        }
       ]
     ]
   }

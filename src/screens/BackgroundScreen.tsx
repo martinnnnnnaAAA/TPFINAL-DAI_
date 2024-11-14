@@ -48,8 +48,8 @@ export default function BackgroundScreen() {
         aspect: [16, 9],
       });
 
-      if (!result.canceled && result.assets[0].uri) {
-        await saveImage(result.assets[0].uri);
+      if (!result.cancelled && result.uri) {
+        await saveImage(result.uri);
       }
     } catch (error) {
       Alert.alert('Error', 'No se pudo tomar la foto');
@@ -73,8 +73,8 @@ export default function BackgroundScreen() {
         quality: 1,
       });
 
-      if (!result.canceled && result.assets?.[0]?.uri) {
-        await saveImage(result.assets[0].uri);
+      if (!result.cancelled && result.uri) {
+        await saveImage(result.uri);
       }
     } catch (error) {
       console.error('Error picking image:', error);
