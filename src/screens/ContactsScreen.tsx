@@ -3,6 +3,7 @@ import { View, StyleSheet, FlatList, Text, Alert } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import { Ionicons } from '@expo/vector-icons';
 import { showError } from '../utils/errorHandler';
+import { BackgroundWrapper } from '../components/BackgroundWrapper';
 
 interface Contact {
   id: string | undefined;
@@ -54,15 +55,17 @@ export default function ContactsScreen() {
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Contactos</Text>
-      <FlatList
-        data={contacts}
-        renderItem={renderContact}
-        keyExtractor={(item, index) => item.id || index.toString()}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
-      />
-    </View>
+    <BackgroundWrapper>
+      <View style={styles.container}>
+        <Text style={styles.header}>Contactos</Text>
+        <FlatList
+          data={contacts}
+          renderItem={renderContact}
+          keyExtractor={(item, index) => item.id || index.toString()}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+        />
+      </View>
+    </BackgroundWrapper>
   );
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { BackgroundWrapper } from '../components/BackgroundWrapper';
 
 interface TeamInfo {
   teamName: string;
@@ -17,16 +18,18 @@ const TEAM_INFO = {
 
 export default function AboutScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Acerca de</Text>
-      
-      <View style={styles.teamInfo}>
-        <Text style={styles.teamName}>{TEAM_INFO.teamName}</Text>
-        {TEAM_INFO.members.map((member, index) => (
-          <Text key={index} style={styles.memberName}>{member}</Text>
-        ))}
+    <BackgroundWrapper>
+      <View style={styles.container}>
+        <Text style={styles.header}>Acerca de</Text>
+        
+        <View style={styles.teamInfo}>
+          <Text style={styles.teamName}>{TEAM_INFO.teamName}</Text>
+          {TEAM_INFO.members.map((member, index) => (
+            <Text key={index} style={styles.memberName}>{member}</Text>
+          ))}
+        </View>
       </View>
-    </View>
+    </BackgroundWrapper>
   );
 }
 

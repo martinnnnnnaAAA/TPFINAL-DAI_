@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BackgroundWrapper } from '../components/BackgroundWrapper';
 
 interface ErrorMessage {
   id: string;
@@ -61,19 +62,21 @@ export default function MessagesScreen() {
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Historial de Mensajes</Text>
-      {errorHistory.length > 0 ? (
-        <FlatList
-          data={errorHistory}
-          renderItem={renderErrorMessage}
-          keyExtractor={(item) => item.id}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
-        />
-      ) : (
-        <Text style={styles.noMessages}>No hay mensajes para mostrar</Text>
-      )}
-    </View>
+    <BackgroundWrapper>
+      <View style={styles.container}>
+        <Text style={styles.header}>Historial de Mensajes</Text>
+        {errorHistory.length > 0 ? (
+          <FlatList
+            data={errorHistory}
+            renderItem={renderErrorMessage}
+            keyExtractor={(item) => item.id}
+            ItemSeparatorComponent={() => <View style={styles.separator} />}
+          />
+        ) : (
+          <Text style={styles.noMessages}>No hay mensajes para mostrar</Text>
+        )}
+      </View>
+    </BackgroundWrapper>
   );
 }
 

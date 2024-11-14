@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { showError } from '../utils/errorHandler';
+import { BackgroundWrapper } from '../components/BackgroundWrapper';
 
 const VIDEO_URL_KEY = 'video_url';
 
@@ -38,33 +39,35 @@ export default function VideoScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Video Favorito</Text>
-      
-      <TextInput
-        style={styles.input}
-        value={videoUrl}
-        onChangeText={setVideoUrl}
-        placeholder="Ingresa la URL del video"
-        onSubmitEditing={handleUrlSubmit}
-        autoCapitalize="none"
-      />
-
-      {savedUrl ? (
-        <Video
-          source={{ uri: savedUrl }}
-          style={styles.video}
-          useNativeControls
-          resizeMode={ResizeMode.CONTAIN}
-          isLooping
-          shouldPlay
+    <BackgroundWrapper>
+      <View style={styles.container}>
+        <Text style={styles.header}>Video Favorito</Text>
+        
+        <TextInput
+          style={styles.input}
+          value={videoUrl}
+          onChangeText={setVideoUrl}
+          placeholder="Ingresa la URL del video"
+          onSubmitEditing={handleUrlSubmit}
+          autoCapitalize="none"
         />
-      ) : (
-        <Text style={styles.placeholder}>
-          Ingresa una URL de video para reproducir
-        </Text>
-      )}
-    </View>
+
+        {savedUrl ? (
+          <Video
+            source={{ uri: savedUrl }}
+            style={styles.video}
+            useNativeControls
+            resizeMode={ResizeMode.CONTAIN}
+            isLooping
+            shouldPlay
+          />
+        ) : (
+          <Text style={styles.placeholder}>
+            Ingresa una URL de video para reproducir
+          </Text>
+        )}
+      </View>
+    </BackgroundWrapper>
   );
 }
 
