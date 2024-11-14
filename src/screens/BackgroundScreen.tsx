@@ -34,8 +34,11 @@ export default function BackgroundScreen() {
 
   const saveImage = async (uri: string) => {
     try {
+      console.log('Saving image:', uri);
       await setBackgroundImage(uri);
+      console.log('Image saved successfully');
     } catch (error) {
+      console.error('Error saving image:', error);
       Alert.alert('Error', 'No se pudo guardar la imagen');
     }
   };
@@ -48,8 +51,8 @@ export default function BackgroundScreen() {
         aspect: [16, 9],
       });
 
-      if (!result.cancelled && result.uri) {
-        await saveImage(result.uri);
+      if (!result.canceled && result.assets && result.assets[0]) {
+        await saveImage(result.assets[0].uri);
       }
     } catch (error) {
       Alert.alert('Error', 'No se pudo tomar la foto');
@@ -73,8 +76,8 @@ export default function BackgroundScreen() {
         quality: 1,
       });
 
-      if (!result.cancelled && result.uri) {
-        await saveImage(result.uri);
+      if (!result.canceled && result.assets && result.assets[0]) {
+        await saveImage(result.assets[0].uri);
       }
     } catch (error) {
       console.error('Error picking image:', error);

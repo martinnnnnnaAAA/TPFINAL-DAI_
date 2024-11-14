@@ -33,12 +33,14 @@ export const BackgroundProvider = ({ children }: { children: React.ReactNode }) 
 
   const saveBackgroundImage = async (uri: string | null) => {
     try {
+      console.log('Context saving background:', uri);
       if (uri) {
         await AsyncStorage.setItem(BACKGROUND_IMAGE_KEY, uri);
       } else {
         await AsyncStorage.removeItem(BACKGROUND_IMAGE_KEY);
       }
       setBackgroundImage(uri);
+      console.log('Context saved background successfully');
     } catch (error) {
       console.error('Error saving background image:', error);
     }
