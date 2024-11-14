@@ -24,7 +24,7 @@ export default function App() {
                 backgroundColor: 'rgba(255, 255, 255, 0.8)',
               },
               tabBarIcon: ({ focused, color, size }) => {
-                let iconName;
+                let iconName: keyof typeof Ionicons.glyphMap;
 
                 switch (route.name) {
                   case 'Background':

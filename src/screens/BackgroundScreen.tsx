@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useBackground } from '../context/BackgroundContext';
+import { BackgroundWrapper } from '../components/BackgroundWrapper';
 
 export default function BackgroundScreen() {
   const { backgroundImage, setBackgroundImage } = useBackground();
@@ -82,26 +83,28 @@ export default function BackgroundScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Fondo de Pantalla</Text>
-      
-      {backgroundImage && (
-        <Image
-          source={{ uri: backgroundImage }}
-          style={styles.preview}
-        />
-      )}
+    <BackgroundWrapper>
+      <View style={styles.container}>
+        <Text style={styles.header}>Fondo de Pantalla</Text>
+        
+        {backgroundImage && (
+          <Image
+            source={{ uri: backgroundImage }}
+            style={styles.preview}
+          />
+        )}
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={takePhoto}>
-          <Text style={styles.buttonText}>Tomar Foto</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={takePhoto}>
+            <Text style={styles.buttonText}>Tomar Foto</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={pickImage}>
-          <Text style={styles.buttonText}>Seleccionar de Galería</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={pickImage}>
+            <Text style={styles.buttonText}>Seleccionar de Galería</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </BackgroundWrapper>
   );
 }
 
@@ -116,19 +119,25 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: 20,
     backgroundColor: 'rgba(240, 240, 240, 0.8)',
+    borderRadius: 8,
+    marginHorizontal: 20,
   },
   preview: {
-    width: '100%',
-    height: 300,
+    width: '80%',
+    height: 200,
     marginVertical: 20,
     resizeMode: 'cover',
+    alignSelf: 'center',
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: 'rgba(255, 255, 255, 0.8)',
   },
   buttonContainer: {
     padding: 20,
     gap: 10,
   },
   button: {
-    backgroundColor: '#007AFF',
+    backgroundColor: 'rgba(0, 122, 255, 0.9)',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
