@@ -1,5 +1,6 @@
 {
   "expo": {
+    "sdkVersion": "52.0.0",
     "name": "my-app",
     "slug": "my-app",
     "version": "1.0.0",
@@ -22,6 +23,15 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "La aplicación necesita acceso a tus fotos.",
+          "cameraPermission": "La aplicación necesita acceso a tu cámara."
+        }
+      ]
+    ]
   }
 }

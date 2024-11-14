@@ -1,14 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import * as Camera from 'expo-camera';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useBackground } from '../context/BackgroundContext';
-
-const BACKGROUND_IMAGE_KEY = 'background_image';
 
 export default function BackgroundScreen() {
   const { backgroundImage, setBackgroundImage } = useBackground();
+
+  useEffect(() => {
+    (async () => {
+      // Request media library permissions first
+      const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (galleryStatus.status !== 'granted') {
+        Alert.alert(
+          'Permiso Denegado',
+          'Necesitas dar permiso para acceder a tu galería de fotos',
+          [{ text: 'OK' }]
+        );
+        return;
+      }
+
+      // Then request camera permissions
+      const cameraStatus = await ImagePicker.requestCameraPermissionsAsync();
+      if (cameraStatus.status !== 'granted') {
+        Alert.alert(
+          'Permiso Denegado',
+          'Necesitas dar permiso para acceder a la cámara',
+          [{ text: 'OK' }]
+        );
+      }
+    })();
+  }, []);
 
   const saveImage = async (uri: string) => {
     try {
@@ -36,17 +57,26 @@ export default function BackgroundScreen() {
 
   const pickImage = async () => {
     try {
+      const { status } = await ImagePicker.getMediaLibraryPermissionsAsync();
+      if (status !== 'granted') {
+        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (permissionResult.status !== 'granted') {
+          Alert.alert('Error', 'Se necesita permiso para acceder a la galería');
+          return;
+        }
+      }
+
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [16, 9],
         quality: 1,
       });
 
-      if (!result.canceled && result.assets[0].uri) {
+      if (!result.canceled && result.assets?.[0]?.uri) {
         await saveImage(result.assets[0].uri);
       }
     } catch (error) {
+      console.error('Error picking image:', error);
       Alert.alert('Error', 'No se pudo seleccionar la imagen');
     }
   };
@@ -78,14 +108,14 @@ export default function BackgroundScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
     paddingTop: 50,
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     padding: 20,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: 'rgba(240, 240, 240, 0.8)',
   },
   preview: {
     width: '100%',
